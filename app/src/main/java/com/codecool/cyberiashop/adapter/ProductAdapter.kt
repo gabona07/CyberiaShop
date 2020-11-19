@@ -1,4 +1,4 @@
-package com.codecool.cyberiashop
+package com.codecool.cyberiashop.adapter
 
 import android.view.LayoutInflater
 import android.view.View
@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.codecool.cyberiashop.R
 import com.codecool.cyberiashop.model.Product
 import com.squareup.picasso.Picasso
 
@@ -14,6 +15,7 @@ class ProductAdapter(private val products : ArrayList<Product>): RecyclerView.Ad
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val image: ImageView = itemView.findViewById(R.id.product_image)
         val title: TextView = itemView.findViewById(R.id.title)
+        val price: TextView = itemView.findViewById(R.id.price)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -24,6 +26,7 @@ class ProductAdapter(private val products : ArrayList<Product>): RecyclerView.Ad
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         Picasso.get().load(products[position].photoURL).into(holder.image)
         holder.title.text = products[position].title
+        holder.price.text = products[position].price
     }
 
     override fun getItemCount(): Int {
