@@ -1,5 +1,6 @@
 package com.codecool.cyberiashop.adapter
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,6 +9,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.codecool.cyberiashop.R
 import com.codecool.cyberiashop.model.Product
+import com.codecool.cyberiashop.view.DetailsActivity
 import com.squareup.picasso.Picasso
 
 class ProductAdapter(private val products : ArrayList<Product>): RecyclerView.Adapter<ProductAdapter.ViewHolder>() {
@@ -20,6 +22,14 @@ class ProductAdapter(private val products : ArrayList<Product>): RecyclerView.Ad
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.product_item, parent, false)
+        val holder = ViewHolder(view)
+        val intent = Intent(parent.context, DetailsActivity::class.java)
+        intent.putExtra("name", products[holder.adapterPosition + 1].title)
+        intent.putExtra("price", products[holder.adapterPosition + 1].price)
+        intent.putExtra("image", products[holder.adapterPosition + 1].photoURL)
+        view.setOnClickListener {
+            parent.context.startActivity(intent)
+        }
         return ViewHolder(view)
     }
 
