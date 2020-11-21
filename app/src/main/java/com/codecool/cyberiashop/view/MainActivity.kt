@@ -1,5 +1,6 @@
 package com.codecool.cyberiashop.view
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.GridLayoutManager
@@ -14,14 +15,23 @@ class MainActivity : AppCompatActivity(), MainContract.MainView {
 
     var presenter: MainPresenter = MainPresenter()
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         presenter.onAttach(this)
-        recycler_view.apply {
-            layoutManager = GridLayoutManager(this@MainActivity, 2)
-            adapter = ProductAdapter(presenter.databaseInit())
+        recycler_view.layoutManager = GridLayoutManager(this@MainActivity, 2)
+        val adapter = ProductAdapter(presenter.databaseInit())
+        recycler_view.adapter = adapter
+        adapter.onItemClick= {
+            val intent = Intent(this, DetailsActivity::class.java)
+
+            intent.putExtra("name", it.title)
+            intent.putExtra("price", it.price)
+            intent.putExtra("image", it.photoURL)
+            startActivity(intent)
         }
+
     }
 
     override fun showLoading() {
