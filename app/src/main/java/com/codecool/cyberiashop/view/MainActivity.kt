@@ -7,7 +7,6 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.codecool.cyberiashop.adapter.ProductAdapter
 import com.codecool.cyberiashop.R
 import com.codecool.cyberiashop.contract.MainContract
-import com.codecool.cyberiashop.model.Product
 import com.codecool.cyberiashop.presenter.MainPresenter
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -20,18 +19,21 @@ class MainActivity : AppCompatActivity(), MainContract.MainView {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         presenter.onAttach(this)
+        setupRecyclerView()
+    }
+
+    private fun setupRecyclerView() {
         recycler_view.layoutManager = GridLayoutManager(this@MainActivity, 2)
         val adapter = ProductAdapter(presenter.databaseInit())
         recycler_view.adapter = adapter
         adapter.onItemClick= {
             val intent = Intent(this, DetailsActivity::class.java)
-
             intent.putExtra("name", it.title)
             intent.putExtra("price", it.price)
+            intent.putExtra("detail", it.details)
             intent.putExtra("image", it.photoURL)
             startActivity(intent)
         }
-
     }
 
     override fun showLoading() {

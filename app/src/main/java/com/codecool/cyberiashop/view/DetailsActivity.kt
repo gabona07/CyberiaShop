@@ -18,11 +18,13 @@ class DetailsActivity : AppCompatActivity() {
     private fun setProductDetails() {
         val name = intent.getStringExtra("name")
         val price = intent.getStringExtra("price")
+        val detail = intent.getStringExtra("detail")
         val image = intent.getStringExtra("image")
 
         Picasso.get().load(image).into(detail_product_image)
         detail_product_name.text = name
         detail_product_price.text = price
+        detail_product_detail.text = detail
 
         in_stock.setOnClickListener {
             AlertDialog.Builder(this)
