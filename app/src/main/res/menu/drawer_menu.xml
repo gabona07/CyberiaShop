@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <group
+        android:checkableBehavior="single">
+    <item
+        android:id="@+id/home"
+        android:orderInCategory="100"
+        android:title="@string/home"
+        android:icon="@drawable/ic_baseline_attach_money_24"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/cyberware"
+        android:orderInCategory="100"
+        android:title="@string/cyberware"
+        android:icon="@drawable/ic_baseline_biotech_24"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/clothing"
+        android:orderInCategory="100"
+        android:title="@string/clothing"
+        android:icon="@drawable/ic_baseline_checkroom_24"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/electric_animals"
+        android:orderInCategory="100"
+        android:title="@string/electric_animals"
+        android:icon="@drawable/ic_baseline_emoji_nature_24"
+        app:showAsAction="never" />
+    </group>
+</menu>
