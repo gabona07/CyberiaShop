@@ -23,6 +23,14 @@ class MainPresenter : MainContract.MainPresenter{
         return products.filter { product -> product.type == "Electric Animal"  }
     }
 
+    fun getCyberwareItems(): List<Product> {
+        return products.filter { product -> product.type == "Cyberware"  }
+    }
+
+    fun getClothingItems(): List<Product> {
+        return products.filter { product -> product.type == "Clothing"  }
+    }
+
     override fun onAttach(view: BaseContract.BaseView) {
         this.view = view as MainContract.MainView
     }

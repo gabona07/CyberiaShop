@@ -1,19 +1,12 @@
 package com.codecool.cyberiashop.view
 
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.core.view.GravityCompat
-import androidx.recyclerview.widget.GridLayoutManager
-import com.codecool.cyberiashop.FragmentAnimals
-import com.codecool.cyberiashop.MainFragment
-import com.codecool.cyberiashop.adapter.ProductAdapter
 import com.codecool.cyberiashop.R
 import com.codecool.cyberiashop.contract.MainContract
-import com.codecool.cyberiashop.presenter.MainPresenter
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.main.*
 
 class MainActivity : AppCompatActivity(), MainContract.MainView {
 
@@ -46,8 +39,12 @@ class MainActivity : AppCompatActivity(), MainContract.MainView {
                 R.id.home -> {
                     supportFragmentManager.beginTransaction().replace(R.id.frame_layout, MainFragment()).commit()
                 }
-                R.id.cyberware -> println()
-                R.id.clothing -> println()
+                R.id.cyberware -> {
+                    supportFragmentManager.beginTransaction().replace(R.id.frame_layout, FragmentCyberware()).commit()
+                }
+                R.id.clothing -> {
+                    supportFragmentManager.beginTransaction().replace(R.id.frame_layout, FragmentClothing()).commit()
+                }
                 R.id.electric_animals -> {
                     supportFragmentManager.beginTransaction().replace(R.id.frame_layout, FragmentAnimals()).commit()
                 }

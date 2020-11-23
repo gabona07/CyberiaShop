@@ -1,4 +1,4 @@
-package com.codecool.cyberiashop
+package com.codecool.cyberiashop.view
 
 import android.content.Intent
 import android.os.Bundle
@@ -8,12 +8,12 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.codecool.cyberiashop.R
 import com.codecool.cyberiashop.adapter.ProductAdapter
 import com.codecool.cyberiashop.contract.MainContract
 import com.codecool.cyberiashop.presenter.MainPresenter
-import com.codecool.cyberiashop.view.DetailsActivity
 
-class FragmentAnimals : Fragment(), MainContract.MainView {
+class FragmentCyberware: Fragment(), MainContract.MainView {
 
     var presenter: MainPresenter = MainPresenter()
     var root : View? = null
@@ -21,8 +21,8 @@ class FragmentAnimals : Fragment(), MainContract.MainView {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         presenter.onAttach(this)
-        root = inflater.inflate(R.layout.fragment_animals, container, false)
-        recyclerView = root!!.findViewById(R.id.recycler_view_animals)
+        root = inflater.inflate(R.layout.fragment_cyberware, container, false)
+        recyclerView = root!!.findViewById(R.id.recycler_view_cyberware)
         setupRecyclerView()
         return root
     }
@@ -30,7 +30,7 @@ class FragmentAnimals : Fragment(), MainContract.MainView {
     private fun setupRecyclerView() {
         recyclerView!!.layoutManager = GridLayoutManager(activity, 2)
         presenter.databaseInit()
-        val adapter = ProductAdapter(presenter.getAnimalItems())
+        val adapter = ProductAdapter(presenter.getCyberwareItems())
         recyclerView!!.adapter = adapter
         adapter.onItemClick= {
             val intent = Intent(activity, DetailsActivity::class.java)
@@ -41,6 +41,7 @@ class FragmentAnimals : Fragment(), MainContract.MainView {
             startActivity(intent)
         }
     }
+
 
     override fun showLoading() {
         TODO("Not yet implemented")
