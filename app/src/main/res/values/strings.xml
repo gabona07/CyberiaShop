@@ -1,4 +1,9 @@
 <resources>
     <string name="app_name">CyberiaShop</string>
     <string name="in_stock">In Stock</string>
+    <string name="settings">Settings</string>
+    <string name="electric_animals">Electric Animals</string>
+    <string name="clothing">Clothing</string>
+    <string name="cyberware">Cyberware</string>
+    <string name="home">Home</string>
 </resources>

@@ -1,38 +1,57 @@
 package com.codecool.cyberiashop.view
 
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.recyclerview.widget.GridLayoutManager
-import com.codecool.cyberiashop.adapter.ProductAdapter
+import android.view.MenuItem
+import androidx.core.view.GravityCompat
 import com.codecool.cyberiashop.R
 import com.codecool.cyberiashop.contract.MainContract
-import com.codecool.cyberiashop.presenter.MainPresenter
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity(), MainContract.MainView {
 
-    var presenter: MainPresenter = MainPresenter()
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        presenter.onAttach(this)
-        setupRecyclerView()
+        setupNavigationView()
+        setupActionBar()
+        supportFragmentManager.beginTransaction().replace(R.id.frame_layout, MainFragment()).commit()
     }
 
-    private fun setupRecyclerView() {
-        recycler_view.layoutManager = GridLayoutManager(this@MainActivity, 2)
-        val adapter = ProductAdapter(presenter.databaseInit())
-        recycler_view.adapter = adapter
-        adapter.onItemClick= {
-            val intent = Intent(this, DetailsActivity::class.java)
-            intent.putExtra("name", it.title)
-            intent.putExtra("price", it.price)
-            intent.putExtra("detail", it.details)
-            intent.putExtra("image", it.photoURL)
-            startActivity(intent)
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        drawer_layout.openDrawer(GravityCompat.START)
+        return super.onOptionsItemSelected(item)
+    }
+
+    private fun setupActionBar() {
+        supportActionBar?.apply {
+            setDisplayHomeAsUpEnabled(true)
+            setHomeAsUpIndicator(R.drawable.ic_baseline_menu_24)
+        }
+    }
+
+    private fun setupNavigationView() {
+        nav_view.setNavigationItemSelectedListener {
+            when(it.itemId) {
+                R.id.home -> {
+                    supportFragmentManager.beginTransaction().replace(R.id.frame_layout, MainFragment()).commit()
+                }
+                R.id.cyberware -> {
+                    supportFragmentManager.beginTransaction().replace(R.id.frame_layout, FragmentCyberware()).commit()
+                }
+                R.id.clothing -> {
+                    supportFragmentManager.beginTransaction().replace(R.id.frame_layout, FragmentClothing()).commit()
+                }
+                R.id.electric_animals -> {
+                    supportFragmentManager.beginTransaction().replace(R.id.frame_layout, FragmentAnimals()).commit()
+                }
+            }
+            it.isChecked = true
+            drawer_layout.closeDrawers()
+            true
         }
     }
 

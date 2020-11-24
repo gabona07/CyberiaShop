@@ -10,5 +10,6 @@ interface MainContract: BaseContract {
 
     interface MainPresenter: BaseContract.BasePresenter {
         fun databaseInit() : ArrayList<Product>
+        fun getAnimalItems(): List<Product>
     }
 }

@@ -12,7 +12,7 @@ import com.codecool.cyberiashop.model.Product
 import com.codecool.cyberiashop.view.DetailsActivity
 import com.squareup.picasso.Picasso
 
-class ProductAdapter(private val products: ArrayList<Product>): RecyclerView.Adapter<ProductAdapter.ViewHolder>() {
+class ProductAdapter(private val products: List<Product>): RecyclerView.Adapter<ProductAdapter.ViewHolder>() {
 
     var onItemClick: ((Product) -> Unit)? = null
 
