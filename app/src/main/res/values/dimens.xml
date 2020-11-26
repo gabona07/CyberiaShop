@@ -3,4 +3,5 @@
     <dimen name="product_size">100dp</dimen>
     <dimen name="product_padding">16dp</dimen>
     <dimen name="fab_margin">50dp</dimen>
+    <dimen name="category_margin">8dp</dimen>
 </resources>
