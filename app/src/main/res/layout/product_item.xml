@@ -5,6 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:padding="@dimen/product_padding"
+    android:background="@color/primaryColor"
     android:layout_height="wrap_content">
 
     <ImageView
@@ -22,6 +23,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:textAlignment="center"
+        android:textColor="@color/primaryTextColor"
         app:layout_constraintTop_toBottomOf="@+id/product_image"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"/>
@@ -29,6 +31,7 @@
     <TextView
         android:id="@+id/price"
         android:layout_width="0dp"
+        android:textColor="@color/primaryTextColor"
         android:layout_height="wrap_content"
         android:textAlignment="center"
         app:layout_constraintTop_toBottomOf="@+id/title"
