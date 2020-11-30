@@ -8,20 +8,17 @@ import android.view.ViewGroup
 import android.widget.ProgressBar
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.codecool.cyberiashop.R
 import com.codecool.cyberiashop.adapter.ProductAdapter
 import com.codecool.cyberiashop.contract.MainContract
 import com.codecool.cyberiashop.presenter.MainPresenter
-import kotlinx.android.synthetic.main.fragment_main.*
 
 class MainFragment: Fragment(),  MainContract.MainView {
 
     var presenter: MainPresenter = MainPresenter()
     var root : View? = null
     var recyclerView: RecyclerView? = null
-    var categoriesRecyclerview: RecyclerView? = null
     var progressBar: ProgressBar? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
