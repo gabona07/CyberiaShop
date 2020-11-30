@@ -25,13 +25,5 @@ class DetailsActivity : AppCompatActivity() {
         detail_product_name.text = name
         detail_product_price.text = price
         detail_product_detail.text = detail
-
-        in_stock.setOnClickListener {
-            AlertDialog.Builder(this)
-                .setMessage("It's in stock")
-                .setPositiveButton("Ok") { p0, p1 -> return@setPositiveButton}
-                .create()
-                .show()
-        }
     }
 }

@@ -11,7 +11,6 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.codecool.cyberiashop.R
-import com.codecool.cyberiashop.adapter.CategoriesAdapter
 import com.codecool.cyberiashop.adapter.ProductAdapter
 import com.codecool.cyberiashop.contract.MainContract
 import com.codecool.cyberiashop.presenter.MainPresenter
@@ -30,7 +29,6 @@ class MainFragment: Fragment(),  MainContract.MainView {
         root = inflater.inflate(R.layout.fragment_main, container, false)
         progressBar = root!!.findViewById(R.id.progressBar)
         recyclerView = root!!.findViewById(R.id.recycler_view)
-        categoriesRecyclerview = root!!.findViewById(R.id.categories_recycler_view)
         setupRecyclerView()
         progressBar!!.visibility = View.GONE
         return root
@@ -48,10 +46,6 @@ class MainFragment: Fragment(),  MainContract.MainView {
             intent.putExtra("image", it.photoURL)
             startActivity(intent)
         }
-        val categories = listOf("Cyberware", "Clothing", "Electric Animals")
-        categoriesRecyclerview!!.layoutManager = LinearLayoutManager(activity, RecyclerView.HORIZONTAL, false)
-        categoriesRecyclerview!!.adapter = CategoriesAdapter(categories)
-
     }
 
     override fun showLoading() {
