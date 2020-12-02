@@ -2,16 +2,15 @@ package com.codecool.cyberiashop.view
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Menu
 import android.view.MenuItem
+import androidx.appcompat.widget.SearchView
 import androidx.core.view.GravityCompat
 import com.codecool.cyberiashop.R
 import com.codecool.cyberiashop.contract.MainContract
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity(), MainContract.MainView {
-
-
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,8 +47,10 @@ class MainActivity : AppCompatActivity(), MainContract.MainView {
                 R.id.electric_animals -> {
                     supportFragmentManager.beginTransaction().replace(R.id.frame_layout, FragmentAnimals()).commit()
                 }
+                R.id.search_action -> {
+                    drawer_layout.closeDrawers()
+                }
             }
-            it.isChecked = true
             drawer_layout.closeDrawers()
             true
         }
