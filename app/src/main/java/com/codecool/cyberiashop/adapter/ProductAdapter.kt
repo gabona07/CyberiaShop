@@ -1,7 +1,6 @@
 package com.codecool.cyberiashop.adapter
 
 import android.content.Intent
-import android.text.method.TextKeyListener.clear
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,15 +13,13 @@ import com.codecool.cyberiashop.R
 import com.codecool.cyberiashop.model.Product
 import com.codecool.cyberiashop.view.DetailsActivity
 import com.squareup.picasso.Picasso
-import java.util.*
 
-class ProductAdapter(private val products: MutableList<Product>): RecyclerView.Adapter<ProductAdapter.ViewHolder>(), Filterable {
+class ProductAdapter(private var products: MutableList<Product>): RecyclerView.Adapter<ProductAdapter.ViewHolder>(), Filterable {
 
     var onItemClick: ((Product) -> Unit)? = null
-    var productListFull = mutableListOf<Product>()
+    var productListFull = products.toMutableList()
     private val filter: Filter = (object : Filter() {
         override fun performFiltering(constraint: CharSequence?): FilterResults {
-            products.forEach { productListFull.add(it) }
             var filteredList = mutableListOf<Product>()
             if (constraint == null || constraint.isEmpty()) {
                 filteredList.addAll(productListFull)
@@ -42,7 +39,7 @@ class ProductAdapter(private val products: MutableList<Product>): RecyclerView.A
         override fun publishResults(constraint: CharSequence?, results: FilterResults?) {
             products.clear()
             if (results != null) {
-                products.addAll(results.values as List<Product>)
+                setProducts(results.values as MutableList<Product>)
             }
             notifyDataSetChanged()
         }
@@ -88,5 +85,7 @@ class ProductAdapter(private val products: MutableList<Product>): RecyclerView.A
         return filter
     }
 
-
+    fun setProducts(filteredProducts: MutableList<Product>) {
+        this.products = filteredProducts
+    }
 }

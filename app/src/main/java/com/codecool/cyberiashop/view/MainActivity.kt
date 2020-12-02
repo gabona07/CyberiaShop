@@ -20,6 +20,11 @@ class MainActivity : AppCompatActivity(), MainContract.MainView {
         supportFragmentManager.beginTransaction().replace(R.id.frame_layout, MainFragment()).commit()
     }
 
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.drawer_menu, menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         drawer_layout.openDrawer(GravityCompat.START)
         return super.onOptionsItemSelected(item)
@@ -46,9 +51,6 @@ class MainActivity : AppCompatActivity(), MainContract.MainView {
                 }
                 R.id.electric_animals -> {
                     supportFragmentManager.beginTransaction().replace(R.id.frame_layout, FragmentAnimals()).commit()
-                }
-                R.id.search_action -> {
-                    drawer_layout.closeDrawers()
                 }
             }
             drawer_layout.closeDrawers()
