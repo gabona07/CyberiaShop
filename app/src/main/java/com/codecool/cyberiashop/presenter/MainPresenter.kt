@@ -30,16 +30,16 @@ class MainPresenter : MainContract.MainPresenter{
         return products
     }
 
-    override fun getAnimalItems(): List<Product> {
-        return products.filter { product -> product.type == "Electric Animal"  }
+    override fun getAnimalItems(): MutableList<Product> {
+        return products.filter { product -> product.type == "Electric Animal"  } as MutableList<Product>
     }
 
-    fun getCyberwareItems(): List<Product> {
-        return products.filter { product -> product.type == "Cyberware"  }
+    fun getCyberwareItems(): MutableList<Product> {
+        return products.filter { product -> product.type == "Cyberware"  } as MutableList<Product>
     }
 
-    fun getClothingItems(): List<Product> {
-        return products.filter { product -> product.type == "Clothing"  }
+    fun getClothingItems(): MutableList<Product> {
+        return products.filter { product -> product.type == "Clothing"  } as MutableList<Product>
     }
 
     override fun onAttach(view: BaseContract.BaseView) {

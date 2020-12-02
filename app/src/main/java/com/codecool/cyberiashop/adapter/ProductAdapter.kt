@@ -4,6 +4,8 @@ import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Filter
+import android.widget.Filterable
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
@@ -12,9 +14,37 @@ import com.codecool.cyberiashop.model.Product
 import com.codecool.cyberiashop.view.DetailsActivity
 import com.squareup.picasso.Picasso
 
-class ProductAdapter(private val products: List<Product>): RecyclerView.Adapter<ProductAdapter.ViewHolder>() {
+class ProductAdapter(private var products: MutableList<Product>): RecyclerView.Adapter<ProductAdapter.ViewHolder>(), Filterable {
 
     var onItemClick: ((Product) -> Unit)? = null
+    var productListFull = products.toMutableList()
+    private val filter: Filter = (object : Filter() {
+        override fun performFiltering(constraint: CharSequence?): FilterResults {
+            var filteredList = mutableListOf<Product>()
+            if (constraint == null || constraint.isEmpty()) {
+                filteredList.addAll(productListFull)
+            } else {
+                val filterPattern = constraint.toString().toLowerCase().trim()
+                productListFull.forEach {
+                    if (it.title.toLowerCase().contains(filterPattern)) {
+                        filteredList.add(it)
+                    }
+                }
+            }
+            val result = FilterResults()
+            result.values = filteredList
+            return result
+        }
+
+        override fun publishResults(constraint: CharSequence?, results: FilterResults?) {
+            products.clear()
+            if (results != null) {
+                setProducts(results.values as MutableList<Product>)
+            }
+            notifyDataSetChanged()
+        }
+
+    })
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val image: ImageView = itemView.findViewById(R.id.product_image)
@@ -25,7 +55,6 @@ class ProductAdapter(private val products: List<Product>): RecyclerView.Adapter<
                 onItemClick?.invoke(products[adapterPosition])
             }
         }
-
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -50,5 +79,13 @@ class ProductAdapter(private val products: List<Product>): RecyclerView.Adapter<
 
     override fun getItemCount(): Int {
         return products.size
+    }
+
+    override fun getFilter(): Filter {
+        return filter
+    }
+
+    fun setProducts(filteredProducts: MutableList<Product>) {
+        this.products = filteredProducts
     }
 }

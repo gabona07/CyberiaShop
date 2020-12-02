@@ -2,7 +2,9 @@ package com.codecool.cyberiashop.view
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Menu
 import android.view.MenuItem
+import androidx.appcompat.widget.SearchView
 import androidx.core.view.GravityCompat
 import com.codecool.cyberiashop.R
 import com.codecool.cyberiashop.contract.MainContract
@@ -10,15 +12,17 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity(), MainContract.MainView {
 
-
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setupNavigationView()
         setupActionBar()
         supportFragmentManager.beginTransaction().replace(R.id.frame_layout, MainFragment()).commit()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.drawer_menu, menu)
+        return super.onCreateOptionsMenu(menu)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -49,7 +53,6 @@ class MainActivity : AppCompatActivity(), MainContract.MainView {
                     supportFragmentManager.beginTransaction().replace(R.id.frame_layout, FragmentAnimals()).commit()
                 }
             }
-            it.isChecked = true
             drawer_layout.closeDrawers()
             true
         }
